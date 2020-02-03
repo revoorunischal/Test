@@ -85,6 +85,9 @@ Below is a  custom implementation for fetching FinCache Object and transforming 
 
 ## Design
 
+<img src="https://github.com/revoorunischal/Test/blob/master/Design.png">
+
+
 **FIN-J2J:** It is a Finacle‘s JSON to JSON transformation library, a wrapper over Java’s JOLT library. Interfaces for custom operations and plugins will be provided in this library. This java utility will be packaged as a jar. So that application who wants to use that functionality can directly include this jar in their package and can use default operation by directly calling the functions of this utility for transformation. It will take input and spec as a mandatory parameter but context is an optional parameter.
 - **Input:** it is a JSON object that needs to be transformed and can have either a list or map. Input will be provided by the business application that wants to use this utility.
 - **Spec:** It is a list of the JSON object. Each object in the spec specifies an operation and will have three things - operation name which will be a fully qualified package name in case of custom and keyword in case of default operation, spec which will be a set of rules for transformation under that operation and data source which is an optional field. The data source will have the information about the connection to be made in case any operation required to fetch something from someplace. This connection management will be handled by the application server while coming up. And each time while building a spec that application server will look for the data sources required by the custom operation and pass the connection reference to this utility along with the package name and on returning the handle by the custom operation jars, the application server will mark the connection free.
