@@ -80,7 +80,7 @@ Below is a  custom implementation for fetching FinCache Object and transforming 
 
 - The String forwarded is now parsed to create a java object. Apply shiftR again with the object in resultantFields as a spec and the java object as input. In the end we merge input with the latest object which got created by shitfr.
 
-[example here](Example.md) gives you a step by step process of fincache Fetch and transform 
+[Example here](example.md) gives you a step by step process of fincache Fetch and transform 
 
 
 ## Design
