@@ -80,7 +80,9 @@ Below is a  custom implementation for fetching FinCache Object and transforming 
 
 - The String forwarded is now parsed to create a java object. Apply shiftR again with the object in resultantFields as a spec and the java object as input. In the end we merge input with the latest object which got created by shitfr.
 
-The [Example here](Example.md) gives you a step by step process of fincache Fetch and transform 
+[example here](Example.md) gives you a step by step process of fincache Fetch and transform 
+
+
 ## Design
 
 **FIN-J2J:** It is a Finacle‘s JSON to JSON transformation library, a wrapper over Java’s JOLT library. Interfaces for custom operations and plugins will be provided in this library. This java utility will be packaged as a jar. So that application who wants to use that functionality can directly include this jar in their package and can use default operation by directly calling the functions of this utility for transformation. It will take input and spec as a mandatory parameter but context is an optional parameter.
