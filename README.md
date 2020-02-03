@@ -4,15 +4,15 @@
 
 [1.	Overview](#Overview)
 
-[2.	Introduction]()
+[2.	Introduction](#introduction)
 
-[3.	JOLT Custom Operations]()
+[3.	JOLT Custom Operations](#jolt-custom-operations)
 
-[4.	Design]()
+[4.	Design](#design)
 
-[5.	Guidelines for custom operation(Fincache)]()
+[5.	Guidelines for custom operation(Fincache)](#error-handling-in-fin-jxj)
 
-[6.	Error Handling in FIN-JXJ]()
+[6.	Error Handling in FIN-JXJ](#error-handling-in-fin-jxj)
 
 ## Overview
    For a transaction to takes place, there are multiple calls from one system to another, calls can be between internal system or any external system may be involved. Output generated from one system is fed as input to another but the data structure between them may not be consistent. Payload expected is usually different from payload provided many times. This document proposes a framework to overcome this inconsistent behaviour due to multiple system calls.
@@ -57,19 +57,21 @@ JOLT provides its set of operations to transform json.
 - For someone to write a custom operation, it requires to first list down the functionality required to be performed by the custom java class. Then rules or wildcards similar to the existing operations need to be defined which can be used while writing specs for different input output pair.
 - Custom operations can be chained with the existing operations to achieve desired result. Once the operation is written one can directly write spec and start using it for their purpose.
 
-## FinCache Fetch and Transform
+**FinCache Fetch and Transform**
 Below is a  custom implementation for fetching FinCache Object and transforming it with input Object and return.
 
  This is a spec driven custom implementation to fetch data from fincache and add it into input according to spec. The following Json is a Spec format of how finCache transformation needs to be called.
 ```
-    [{
-    "operation": "com.finacle.infra.jsonconv.FincacheCustomFetch",
-    "spec": {
-      "queryParams": {},
-      "resultantFields": {},
-      "fcoObject": ""
-    }
-  }]
+    [
+      {
+       "operation": "com.finacle.infra.jsonconv.FincacheCustomFetch",
+       "spec": {
+         "queryParams": {},
+         "resultantFields": {},
+         "fcoObject": ""
+       }
+      }
+    ]
 ```
 
 - Operation "com.finacle.infra.jsonconv.FincacheCustomFetch" is to identify that its a FinacheFetch. First parameter of spec i.e queryParams is to create a new object from input. Created object contains all keys required by FCO to fetch data. The generation of object is done by running shiftR operation of JOLT with object in “queryParams” as a spec and input msg as object to be transformed.
@@ -80,7 +82,7 @@ Below is a  custom implementation for fetching FinCache Object and transforming 
 
 The following is the sample spec which will be applied on the input below that 
 
-- Sample Spec 
+- **Sample Spec** 
 ```
 [
   {
@@ -109,7 +111,7 @@ The following is the sample spec which will be applied on the input below that
 ]
 ```
 
-- Input 
+- **Input** 
 ```
 {
   "bankId": "0001",
@@ -121,7 +123,7 @@ The following is the sample spec which will be applied on the input below that
 }
 ```
 
-- Expected Output
+- **Expected Output**
 ```
 {
   "bankId": "0001",
