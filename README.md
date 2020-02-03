@@ -85,6 +85,8 @@ Below is a  custom implementation for fetching FinCache Object and transforming 
 
 ## Design
 
+![Design](https://github.com/revoorunischal/Test/blob/master/Design.png "Design")
+
 <img src="https://github.com/revoorunischal/Test/blob/master/Design.png">
 
 
