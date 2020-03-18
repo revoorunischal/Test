@@ -73,12 +73,29 @@ Below is a  custom implementation for fetching FinCache Object and transforming 
       }
     ]
 ```
-
+   
 - Operation "com.finacle.infra.jsonconv.FincacheCustomFetch" is to identify that its a FinacheFetch. First parameter of spec i.e queryParams is to create a new object from input. Created object contains all keys required by FCO to fetch data. The generation of object is done by running shiftR operation of JOLT with object in “queryParams” as a spec and input msg as object to be transformed.
 
-- Once the object is created we sort them alphabetically on keys and generate a search string which starts with “FC|” and  “<fcoObject>|” field from spec appended with stringified values of the sorted keys separated by “|”. Using this search string we will see if it exists in the cache service passed in context. If it exists we continue directly with the string in cache. Else we use the object created to fetch data from fincache, the output string returned will be stored in the cache and the same string is sent ahead for processing.
+- Once the object is created we sort them alphabetically on keys and generate a search string which starts with “FC|” and  “<fcoObject>|” field from spec appended with stringified values of the sorted keys separated by “|”. Using this search string we will see if it exists in the cache service passed in context([Check below At Cache Handling to know how it works](#cache-handling). If it exists we continue directly with the string in cache. Else we use the object created to fetch data from fincache server (The call is made to the URL passed in context in key "fcurl"), the output string returned will be stored in the cache and the same string is sent ahead for processing.
 
 - The String forwarded is now parsed to create a java object. Apply shiftR again with the object in resultantFields as a spec and the java object as input. In the end we merge input with the latest object which got created by shitfr.
+
+   This Jolt operation needs a context to work. Context here is a hashmap which contains the following data mandatorily
+```
+   {
+     "fcurl":"http://localhost:8080"
+   }
+```
+   ##### Cache Handling
+   This Custom operation as an optional LRU caching option using "guava". This works if a object of Class "Cache<Object, Object>" passed in the above context with key "cache". Cache needs to be instantiated in calling application and should be stored to reuse the object across requests. Cache is instantiated by running the command below.
+```
+ Cache<Object, Object>  cache = CacheBuilder.newBuilder()
+   .maximumSize(10)     //Number of objects which can be stored in this LRU cache.
+   .expireAfterWrite(5, TimeUnit.MINUTES)   // Maximum time a record can exist in the cache.
+   .build();
+```   
+   If the above cache is passed finCache data is first checked in this object, if found will be used directly else it will fetch from the fincache store it back to the cache and then use it.
+
 
 [Example here](example.md) gives you a step by step process of fincache Fetch and transform 
 
