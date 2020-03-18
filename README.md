@@ -96,6 +96,7 @@ Below is a  custom implementation for fetching FinCache Object and transforming 
 ```   
    If the above cache is passed finCache data is first checked in this object, if found will be used directly else it will fetch from the fincache store it back to the cache and then use it.
 
+NOTE: This plugin only handles single JSON objects so if the fincache returns a arrayList the processing considers only the first element 
 
 The following example gives the step by step process of the process goes on
 - **Sample Spec** 
