@@ -98,6 +98,13 @@ Below is a  custom implementation for fetching FinCache Object and transforming 
 
 NOTE: This plugin only handles single JSON objects so if the fincache returns a arrayList the processing considers only the first element 
 
+#### Exceptions which can occur in fincacheFetch
+- J009 : Unkown error : can occur if fincache server doesnt respond or gives some unkown error.
+- J010 : Invalid spec data : cacn occur if any of these fields are missing ins spec queryParams or resultantFields or fcoObject or if query params couldnt be formed 
+- J011 : Invalid context data : fincache Url is not passed 
+- Apart from these any error which comes in Fincache fetch will be passed back.
+
+
 The following example gives the step by step process of the process goes on
 - **Sample Spec** 
 ```
