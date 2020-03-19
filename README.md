@@ -251,13 +251,53 @@ Jolt library internally has JoltException class which extends RunTimeException a
 - SpecException: It is thrown while processing or loading of spec.
 - TransformException: It is thrown while mapping spec with input json to transform into output json.
 FIN-JXJ will expose its own exception class for custom operations which will extend throwable class and will have additional non mandatory parameters.
-All the exceptions generated in custom operations as well as JOLT library will finally be catched by FIN-JXJ and it will mapped error object to this custom exception class which will always return a common exception object to the application.
+All the exceptions generated in custom operations as well as JOLT library will finally be catched by FIN-JXJ and it will map error object to this custom exception class which will always return a common exception object to the application.
 
-**FIN-JXJException:** Following are the additional parameters in this exception class which are non-mandatory and can be set by the custom classes while throwing this exception.
-- ErrorCode: If in any case custom class wants to pass error code to the library can set in here and pass error code.
+**FIN-JXJException:** Following are the parameters in this exception object returned by the Fin-JXJ library. All the custom operation will always set their exception data in this object and jolt internal exceptions are also mapped to this object.
+- ErrorCode: If in any case custom class wants to pass error code to the library can set in here and pass error code or JOLT library errors are also mapped to error codes defined in this class. And in case of jolt exception error code will start from 'J' but in case of custom exception all the error code will have unique prefix for each operation.
 - ErrorMessage: error message will be set in here.
-- ExceptionClass: Fully qualified Package Name of the class throwing exception will be passed here.
+- ExceptionClass: Fully qualified Package Name of the class or the operation name throwing exception will be passed here.
+- ErrorType: There are four error types defined by FinJXJ Exception which are FATAL, INFO, WARNING AND 
+  ERROR. So based on the nature of error custom classes can set error type.
+- Details: It is a map object. If anybody wants to pass any additional information they can pass here. OperationIndex is aprt of this map object. 
 - OperationIndex: Index no. of the operation will be passed here on which exception has occurred.
 FIN-JXJ will always return FIN-JXJException object in case of any runtime exceptions. If any operation fails then the execution of the operations will stop and it will return back the handle to the application with an exception and null output.
-In case of default operations provided by the JOLT will return SpecException and TransformException, but FIN-JXJ will mapped their error object to its custom exception class but in other cases it will throw the error object as it is. To custom operations Only FIN-JXJException is exposed and they will always return that exception in their processing. Other exceptions will also be finally mapped to this exception only. 
+In case of default operations provided by the JOLT will return SpecException and TransformException, but FIN-JXJ will mapped those errors FINJXJ exception class but in other cases it will throw the error object as it is. To custom operations Only FIN-JXJException is exposed and they will always return that exception in their processing. Other exceptions will also be finally mapped to this exception only. 
+Following is the list of error code and messages, FinJXJ library will throw in case of JOlT related exceptions:
+%s will be replaced by the internal error thrown by operations.
+- J001 : Error occured while processing jolt shift operation. %s
+- J002 : Error occured while processing jolt remove operation. %s
+- J003 : Error occured while processing jolt default operation. %s
+- J004 : Error occured while processing jolt sort operation. %s
+- J005 : Error occured while processing jolt cardinality operation. %s
+- J006 : Error occured while processing jolt modify operation. %s
+- J007 : Invalid operation 
+- J008 : Invalid Input Parameters %s
+- J009 : Unknown Error
+- J010 : Invalid spec
+- J011 : Invalid context data
 
+In case of custom operation they will have their own list of error code and error message.
+
+## Developer Section
+FinJXJ jar can be included by any project by adding this dependency:
+<dependency>
+	<groupId>com.finacle.finjxj</groupId>
+	<artifactId>finjxj-definitions</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+</dependency>
+This interface accepts message - which needs to be transformed and spec - which is list of opertaions that will be used to do transformation. It also accepts context which is an optional parameter. context is provided by the caller application in case if it wants to do something specific to custom operation like to build a application cache, cache object is required which can be passed in context.Any urls to make api calls in custom operation will aslo be part of context.
+
+**Sample code snippet to call the library :**
+
+```
+package com.finacle.App;
+import com.finacle.transform.jsonconv.FinJXJ;
+public class App 
+{
+    		public static void main( String[] args )
+    		{
+            Object output = FinJXJ.transform(spec, input, context);
+    		}
+}
+```
