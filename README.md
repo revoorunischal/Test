@@ -261,3 +261,26 @@ All the exceptions generated in custom operations as well as JOLT library will f
 FIN-JXJ will always return FIN-JXJException object in case of any runtime exceptions. If any operation fails then the execution of the operations will stop and it will return back the handle to the application with an exception and null output.
 In case of default operations provided by the JOLT will return SpecException and TransformException, but FIN-JXJ will mapped their error object to its custom exception class but in other cases it will throw the error object as it is. To custom operations Only FIN-JXJException is exposed and they will always return that exception in their processing. Other exceptions will also be finally mapped to this exception only. 
 
+## Developer Section
+FinJXJ jar can be included by any project by adding this dependency:
+<dependency>
+	<groupId>com.finacle.finjxj</groupId>
+	<artifactId>finjxj-definitions</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+</dependency>
+This interface accepts message - which needs to be transformed and spec - which is list of opertaions that will be used to do transformation. It also accepts context which is an optional parameter. context is provided by the caller application in case if it wants to do something specific to custom operation like to build a application cache, cache object is required which can be passed in context.Any urls to make api calls in custom operation will aslo be part of context.
+**Sample code snippet to call the library :**
+
+```
+package com.finacle.App;
+
+import com.finacle.transform.jsonconv.FinJXJ;
+
+public class App 
+{
+    		public static void main( String[] args )
+    		{
+            Object output = FinJXJ.transform(spec, input, context);
+    		}
+}
+```
