@@ -14,6 +14,8 @@
 
 [6.	Error Handling in FIN-JXJ](#error-handling-in-fin-jxj)
 
+[7.	Developer Section](#Developer-section)
+
 ## Overview
    For a transaction to takes place, there are multiple calls from one system to another, calls can be between internal system or any external system may be involved. Output generated from one system is fed as input to another but the data structure between them may not be consistent. Payload expected is usually different from payload provided many times. This document proposes a framework to overcome this inconsistent behaviour due to multiple system calls.
 
@@ -265,17 +267,17 @@ FIN-JXJ will always return FIN-JXJException object in case of any runtime except
 In case of default operations provided by the JOLT will return SpecException and TransformException, but FIN-JXJ will mapped those errors FINJXJ exception class but in other cases it will throw the error object as it is. To custom operations Only FIN-JXJException is exposed and they will always return that exception in their processing. Other exceptions will also be finally mapped to this exception only. 
 Following is the list of error code and messages, FinJXJ library will throw in case of JOlT related exceptions:
 %s will be replaced by the internal error thrown by operations.
-- J001 : Error occured while processing jolt shift operation. %s
-- J002 : Error occured while processing jolt remove operation. %s
-- J003 : Error occured while processing jolt default operation. %s
-- J004 : Error occured while processing jolt sort operation. %s
-- J005 : Error occured while processing jolt cardinality operation. %s
-- J006 : Error occured while processing jolt modify operation. %s
-- J007 : Invalid operation 
-- J008 : Invalid Input Parameters %s
-- J009 : Unknown Error
-- J010 : Invalid spec
-- J011 : Invalid context data
+	- J001 : Error occured while processing jolt shift operation. %s
+	- J002 : Error occured while processing jolt remove operation. %s
+	- J003 : Error occured while processing jolt default operation. %s
+	- J004 : Error occured while processing jolt sort operation. %s
+	- J005 : Error occured while processing jolt cardinality operation. %s
+	- J006 : Error occured while processing jolt modify operation. %s
+	- J007 : Invalid operation 
+	- J008 : Invalid Input Parameters %s
+	- J009 : Unknown Error
+	- J010 : Invalid spec
+	- J011 : Invalid context data
 
 In case of custom operation they will have their own list of error code and error message.
 
@@ -295,9 +297,9 @@ package com.finacle.App;
 import com.finacle.transform.jsonconv.FinJXJ;
 public class App 
 {
-    		public static void main( String[] args )
+	public static void main( String[] args )
     		{
-            Object output = FinJXJ.transform(spec, input, context);
+           		Object output = FinJXJ.transform(spec, input, context);
     		}
 }
 ```
