@@ -1,4 +1,4 @@
-# JSON TO JSON TRANSFORMATION
+# FINJXJ (Finacle JOLT)
 
 ## Contents
 
