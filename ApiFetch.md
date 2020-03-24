@@ -24,7 +24,7 @@ Here operation says the custom opertaion which needs to be called.
 Spec paramteres have the following uses.
 
 - service : This is a key to the JSON which contains the URL's(IP address or DomainName) to the respective services.
-eg : {"service":"core_service"}
+Eg : {"service":"core_service"}
 
 - path : This is the endpoint of the service request. This can contain a dynamic parameter which will be evaluated with input.
 Eg: {"path":"/Account/${accountDetails.sb.accountId}/balance"} 
