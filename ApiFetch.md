@@ -1,4 +1,5 @@
 **Api data fetch and Transform**
+
 Below is a Jolt custom opertaion for fetching Data from Rest API in GET mode and Transforming it with input Object and return.
 
 Note: Assumptions here is that the end server accepts GET requests with optional query params and return the data in JSON format.
