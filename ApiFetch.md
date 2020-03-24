@@ -30,8 +30,7 @@ eg : {"service":"core_service"}
 Eg: {"path":"/Account/${accountDetails.sb.accountId}/balance"} 
 
 - queryParams : This is of JOLT shift format which is to create a new JSON. This JSON data is converted into queryparams and sent to the server.
-eg : {"bankId":"dcId","accountDetails":{"sb":{"accountId":"acctNum"}}}
+Eg : {"bankId":"dcId","accountDetails":{"sb":{"accountId":"acctNum"}}}
 
 - resultantFields : This is of JOLT shift format which is to create a new JSON. This JSON is later appended to the input. 
-
-eg : {"resultantFields":{"acctName":"acctName","crncyCode":"currencyCode","custId":"custId"}}
+Eg : {"resultantFields":{"acctName":"acctName","crncyCode":"currencyCode","custId":"custId"}}
