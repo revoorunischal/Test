@@ -1,6 +1,6 @@
 **Api data fetch and Transform**
 
-Below is a Jolt custom opertaion for fetching Data from Rest API in GET mode and Transforming it with input Object and return.
+Below is a Jolt custom operation for fetching data from Rest API in GET mode and Transforming it with input Object and return.
 
 Note: Assumptions here is that the end server accepts GET requests with optional query params and return the data in JSON format.
 
@@ -20,7 +20,7 @@ Note: Assumptions here is that the end server accepts GET requests with optional
     ]
 ```
    
-Here operation says the custom opertaion which needs to be called.
+Here operation says the custom operation which needs to be called.
 Spec paramteres have the following uses.
 
 - service : This is a key to the JSON which contains the URL's(IP address or DomainName) to the respective services.
